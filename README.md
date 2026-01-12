@@ -1,4 +1,4 @@
-# TL_NDMnet
+# TL-NDMnet
 
 This repository includes the codes for the manuscript entitled "Time-lapse seismic processing using NDM-net", which was submitted to Computers & Geosciences for peer review. A neural network-based method for accelerating seismic monitoring.
 
