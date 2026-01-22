@@ -417,16 +417,17 @@ class DatasetFromFolderCO2(data.Dataset):
                  dir_target,
                  train_dir, 
                  max_value_x = 1,
-                 max_value_y=1,
+                 max_value_y = 1,
+                 number_of_sources = 126,
                  direction = 'BtoA',transform=None, transform_target = None, 
                  input_size=None, resize_scale=None, crop_size=None, 
                  fliplr = False, flipud = False):
         super(DatasetFromFolderCO2, self).__init__()
         self.path_input_seism = os.path.join(dir_input_seism) #X = 55 m (all)
         self.path_target = os.path.join(dir_target) #Y = 25m (all)
-        
+        self.number_of_sources = number_of_sources
         self.idx = np.load(train_dir)
-        self.idx_next = self.idx + 126
+        self.idx_next = self.idx + self.number_of_sources
         self.filenames_input_seism = [x for x in natsorted(os.listdir(self.path_input_seism))]
         self.filenames_target = [x for x in natsorted(os.listdir(self.path_target))]
         
@@ -481,18 +482,6 @@ class DatasetFromFolderCO2(data.Dataset):
         fn_target_next = os.path.join(self.set_target_next[index])
         target_next = np.load(fn_target_next)
                     
-        # input_seism = input_seism[:-1,:-904]
-        # target = target[:-1,:-904]
-                
-        # input_seism = input_seism / self.max_value_x
-        # target = target / self.max_value_y
-        
-        # input_seism_next = input_seism_next[:-1,:-904]
-        # target_next = target_next[:-1,:-904]
-                
-        # input_seism_next = input_seism_next / self.max_value_x
-        # target_next = target_next / self.max_value_y
-        
         input_seism_real = input_seism.real / self.max_value_x
         target_real = target.real / self.max_value_y
                 
@@ -510,7 +499,7 @@ class DatasetFromFolderCO2(data.Dataset):
             input_seism_real = input_seism_real.type(torch.cuda.FloatTensor)
             target_real = self.transform_target(target_real.copy())
             target_real = target_real.type(torch.cuda.FloatTensor)
-            
+                
             input_seism_imag = self.transform_target(input_seism_imag.copy())
             input_seism_imag = input_seism_imag.type(torch.cuda.FloatTensor)
             target_imag = self.transform_target(target_imag.copy())
