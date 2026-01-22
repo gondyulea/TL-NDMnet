@@ -5,7 +5,7 @@ This repository includes the codes for the manuscript entitled "Time-lapse seism
 # Code introduction
 - [pix2pix.py](pix2pix.py): NDM-net model based on pix2pix architecture.
 - [dataset.py](dataset.py): a code for converting a dataset into suitable format for NDM-net.
-- [Time_Lapse_NDMnet.py)[Time_Lapse_NDMnet.py]: the test code for generating a training dataset using seismograms, training the NDM-net, and analyzing the results of applying the algorithm.
+- [Time_Lapse_NDMnet.ipynb)[Time_Lapse_NDMnet.ipynb]: the test code for generating a training dataset using seismograms, training the NDM-net, and analyzing the results of applying the algorithm.
 
  
 # Requirements
